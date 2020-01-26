@@ -7,19 +7,17 @@
         <title>CRUD-APP</title>
     </head>
     <body>
+        <div class="parent">
          <div class="container">
              <nav class="nav">
                  <h1 class="nav__item"><span class="heading"><</span>POST ANYTHING<span class="heading">/></span></h1>
              </nav>
              <div class="body-container">
                  <input type="text" id="post-title" class="post__title" placeholder="Title">
-                 <textarea type="" class="post__body">Enter text here...</textarea>
+                 <textarea type="" class="post__body" placeholder="Enter text here..."></textarea>
              </div>
              <div class="btn--container">
-                <button class="btn btn--add">Add</button>
-                <button class="btn btn--update">Update</button>
-                <button class="btn btn--delete">delete</button>
-                <!-- <button class="btn btn--read">read</button> -->
+                <button class="btn btn--post" id="btn-post">post</button>
              </div>
          </div>
 
@@ -28,5 +26,9 @@
              <p class="post--body" id="post--body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, assumenda?</p>
              <hr> -->
          </div>
+         </div>
+
+
+         <script src="./app.js" type="module"></script>
     </body>
 </html>
