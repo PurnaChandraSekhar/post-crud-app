@@ -9,6 +9,10 @@ document.querySelector('#btn-post').addEventListener('click', addPost);
 
 //LISTEN FOR DELETE
 document.querySelector('.post--container').addEventListener('click', deletePost);
+
+//LISTEN FOR EDIT 
+document.querySelector('.post--container').addEventListener('click', enableEdit);
+
 //get posts 
 function getposts() {
   http.get('http://localhost:3000/posts')
@@ -52,6 +56,25 @@ function deletePost(e) {
         })
         .catch(err => console.log(err));
      }
+  }
+}
+
+//enable edit
+function enableEdit(e) {
+  e.preventDefault();
+   
+  if(e.target.classList.contains('edit')) {
+    const id = e.target.dataset.id;
+    const title = e.target.previousElementSibling.previousElementSibling.textContent;
+    const body = e.target.previousElementSibling.textContent;
+    const data = {
+      id,
+      title,
+      body
+    }
+
+     //fill the form
+    ui.fillForm(data);
   }
 }
 

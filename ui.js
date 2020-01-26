@@ -1,10 +1,12 @@
 class UI {
     constructor () {
+        this.hiddenId = document.querySelector('#id');
         this.container = document.querySelector('.parent');
         this.posts = document.querySelector('.post--container');
         this.titleInput = document.querySelector('#post-title');
         this.bodyInput = document.querySelector('.post__body');
         this.btnInput = document.querySelector('#btn-post');
+        this.state = 'add';
     }
 
     showPosts(data) {
@@ -14,10 +16,8 @@ class UI {
             output += ` 
             <h2 class="post--title" id="post--title">${post.title}</h2>
             <p class="post--body" id="post--body">${post.body}</p>
-            <div class="options">
              <a href="#" class="link edit" id="edit" data-id="${post.id}">edit</a>
              <a href="#" class="link delete" id="delete" data-id="${post.id}">delete</a>
-            </div>
             <hr>
             `
         })
@@ -59,6 +59,14 @@ class UI {
     clearFields() {
       this.titleInput.value = ""
       this.bodyInput.value = ""
+    }
+
+    //fill the form
+    fillForm(data) {
+        this.titleInput.value = data.title;
+        this.bodyInput.value = data.body;
+        this.hiddenId.value = data.id;
+
     }
 
 }
