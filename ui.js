@@ -15,8 +15,8 @@ class UI {
             <h2 class="post--title" id="post--title">${post.title}</h2>
             <p class="post--body" id="post--body">${post.body}</p>
             <div class="options">
-             <a href="#" class="link edit" id="link">edit</a>
-             <a href="#" class="link delete" id="link">delete</a>
+             <a href="#" class="link edit" id="edit" data-id="${post.id}">edit</a>
+             <a href="#" class="link delete" id="delete" data-id="${post.id}">delete</a>
             </div>
             <hr>
             `

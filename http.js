@@ -18,6 +18,15 @@ class EasyHTTP {
         const resData = await response.json();
         return resData;
     }
+
+    async delete(url) {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'content-type':"application/json"
+            }
+        })
+    }
 }
 
 export const http = new EasyHTTP();
