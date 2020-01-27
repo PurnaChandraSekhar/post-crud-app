@@ -56,6 +56,11 @@ class UI {
       }
     }
 
+    //clear ID
+    clearIdInput() {
+        this.hiddenId.value = '';
+    }
+
     clearFields() {
       this.titleInput.value = ""
       this.bodyInput.value = ""
@@ -67,6 +72,38 @@ class UI {
         this.bodyInput.value = data.body;
         this.hiddenId.value = data.id;
 
+    }
+
+    //change the form state
+    changeTheState(type) {
+        if(type === 'edit') {
+           this.btnInput.textContent = "edit post";
+           //create cancel button
+           const button = document.createElement('button');
+           //add class to the button
+           button.className = "btn btn--update"
+           //add text to the button
+           button.appendChild(document.createTextNode('cancel edit'));
+           //get the parent element
+           const parent = document.querySelector('.btn--container');
+           //get the insert before el
+           const span = document.querySelector('#formEnd');
+           
+           parent.insertBefore(button, span);
+        }else {
+            this.btnInput.textContent = "post";
+
+            //remove cancel button if there
+            if(document.querySelector('.btn--update')) {
+                document.querySelector('.btn--update').remove();
+            }
+
+            //clear ID from hidden field
+            this.clearIdInput();
+
+            //clear input fields
+            this.clearFields();
+        }
     }
 
 }

@@ -13,6 +13,9 @@ document.querySelector('.post--container').addEventListener('click', deletePost)
 //LISTEN FOR EDIT 
 document.querySelector('.post--container').addEventListener('click', enableEdit);
 
+//listen for cancel button
+document.querySelector('.btn--container').addEventListener('click', cancelEdit);
+
 //get posts 
 function getposts() {
   http.get('http://localhost:3000/posts')
@@ -24,21 +27,33 @@ function getposts() {
 function addPost() {
   const title = document.querySelector('#post-title').value;
   const body = document.querySelector('.post__body').value;
+  const id = document.querySelector('#id').value;
 
   const data = {
     title,
     body
   }
-
-  if(data.title && data.body){
-    http.post('http://localhost:3000/posts', data)
+   
+  if(data.title === "" && data.body === "") {
+    ui.showAlert('Please fill all the fields', 'alert alert-warning');
+  } else {
+    //check for id
+    if(id === ""){
+      http.post('http://localhost:3000/posts', data)
       .then(res => {
-        ui.showAlert('Post Added', 'alert alert-success');
-        ui.clearFields();
-        getposts();
-
-    })
-    .catch(err => console.log(err))
+      ui.showAlert('Post Added', 'alert alert-success');
+      ui.clearFields();
+      getposts();
+   })
+    }else {
+      //update the post
+      http.update(`http://localhost:3000/posts/${id}`, data)
+       .then(res => {
+         ui.showAlert('Post Updated', 'alert alert-success');
+         ui.changeTheState('add');
+         getposts();
+       })
+    }
   }
   
 }
@@ -75,6 +90,18 @@ function enableEdit(e) {
 
      //fill the form
     ui.fillForm(data);
+
+    //change the form state
+    ui.changeTheState('edit');
+  }
+}
+
+//cancel edit
+function cancelEdit(e) {
+  e.preventDefault();
+  
+  if(e.target.classList.contains('btn--update')) {
+    ui.changeTheState('add');
   }
 }
 

@@ -27,6 +27,20 @@ class EasyHTTP {
             }
         })
     }
+
+    async update(url, data) {
+        const response = await fetch(url, {
+            "method": "PUT",
+            "headers": {
+            "content-type": "application/json"
+            },
+            "body": JSON.stringify(data)
+        });
+
+        const resData = await response.json();
+        return resData;
+        
+    }
 }
 
 export const http = new EasyHTTP();
